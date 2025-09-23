@@ -1,6 +1,6 @@
 # Tractfinder
 
-A simple tract segmentation technique.
+A simple tract segmentation technique. Paper: https://doi.org/10.1002/hbm.26578
 
 ## Installation and setup
 
