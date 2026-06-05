@@ -1,10 +1,11 @@
 *.pyc
+__pycache__/
+.venv/
+.pytest_cache/
 *.mif
 *.mih
 *.dat
 *.nii
 *.nii.gz
 build
-test*
-pytest*
 .DS_Store
