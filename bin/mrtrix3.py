@@ -56,10 +56,15 @@ except ImportError:
     return success
 
 
+# First: check the MRTRIX_HOME environment variable
+if imported (os.path.join (os.environ['MRTRIX_HOME'], 'lib')) \
+    if 'MRTRIX_HOME' in os.environ else False:
+  pass
+
 # Can the MRtrix3 Python modules be found based on their relative location to this file?
 # Note that this includes the case where this file is a softlink within an external module,
 # which provides a direct link to the core installation
-if not imported (os.path.normpath (os.path.join ( \
+elif not imported (os.path.normpath (os.path.join ( \
   os.path.dirname (os.path.realpath (__file__)), os.pardir, 'lib') )):
 
   # If this file is a duplicate, which has been stored in an external module,
@@ -82,11 +87,17 @@ if not imported (os.path.normpath (os.path.join ( \
 
     if not imported (os.path.join (os.path.dirname (build_path), 'lib')):
 
-      sys.stderr.write('''
+      # Last resort: find the MRtrix3 library via mrconvert on the PATH
+      import shutil
+      _mrconvert = shutil.which ('mrconvert')
+      if not (_mrconvert and imported (os.path.normpath (os.path.join (
+          os.path.dirname (os.path.realpath (_mrconvert)), os.pardir, 'lib')))):
+
+        sys.stderr.write('''
 ERROR: Unable to locate MRtrix3 Python modules
 
 For detailed instructions, please refer to:
 https://mrtrix.readthedocs.io/en/latest/tips_and_tricks/external_modules.html
 ''')
-      sys.stderr.flush()
-      sys.exit(1)
+        sys.stderr.flush()
+        sys.exit(1)
