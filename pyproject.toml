@@ -1,0 +1,21 @@
+[project]
+name = "tractfinder"
+version = "0.1.0"
+requires-python = ">=3.5"
+dependencies = [
+    "numpy",
+]
+
+[dependency-groups]
+deformation = [
+    "scipy",
+    "scikit-image",
+    "pyvista",
+]
+dev = ["pytest"]
+
+[tool.uv]
+default-groups = ["deformation", "dev"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
