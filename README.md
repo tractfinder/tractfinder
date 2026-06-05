@@ -192,8 +192,3 @@ tractfinder fod.mif _ _ -deformation_only -tumour tumour.nii.gz -struct mni.nii.
 
 Internally, the functionality to output both forward and reverse deformation fields is available, but this still needs to be exposed to the user interface if there is demand.
 (The forward deformation field would be required e.g. for transforming streamlines.)
-
-## Shell script [legacy]
-
-The basic pipeline is also outlined in the script `tractfinder.sh`. Edit the path variables within appropriately and run as `sh tractfinder.sh`.
-You can also inspect the file and run the corresponding commands directly from the command line (there are only 5 steps at most).
