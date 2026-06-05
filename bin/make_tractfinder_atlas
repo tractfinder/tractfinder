@@ -1,19 +1,15 @@
 #!/usr/bin/env python3
 
-# Copyright (c) 2008-2023 the MRtrix3 contributors.
-#
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
-#
-# Covered Software is provided under this License on an "as is"
-# basis, without warranty of any kind, either expressed, implied, or
-# statutory, including, without limitation, warranties that the
-# Covered Software is free of defects, merchantable, fit for a
-# particular purpose or non-infringing.
-# See the Mozilla Public License v. 2.0 for more details.
-#
-# For more details, see http://www.mrtrix.org/.
+# Tractfinder is Copyright (c) 2023-2026 Fiona Young, and (c) 2026 Tractfinder
+# contributors. The software is distributed "as is", without any warranty, for
+# non-commercial use only. Any commercial use, including incorporation into a
+# product for sale, or use of the software to provide paid services, is not
+# permitted without a commercial license. For licensing enquiries please
+# contact UCL Business Ltd (https://www.uclb.com).
+# 
+# Tractfinder may include redistributed source files from MRtrix3
+# (https://www.mrtrix.org/), which are subject to separate licensing terms.
+# Details can be found in the relevant files.
 
 # Script for mapping fibre bundles based on provided tract orientation atlas[es]
 # Written by Fiona Young, 2023
@@ -24,8 +20,10 @@ from argparse import Action
 def usage(cmdline): #pylint: disable=unused-variable
   from mrtrix3 import algorithm, app #pylint: disable=no-name-in-module, import-outside-toplevel
 
-  cmdline.set_author('Fiona Young (fiona.young.15@ucl.ac.uk)')
+  cmdline.set_author('Fiona Young (fiona.young.15@ucl.ac.uk) and Jon Clayden (code@clayden.org)')
   cmdline.set_synopsis('Create a tract orientation distribution (TOD) atlas from training streamlines')
+  cmdline.set_copyright('Tractfinder is Copyright (c) 2023-2026 Fiona Young, and (c) 2026 Tractfinder contributors. The software is distributed "as is", without any warranty, for non-commercial use only. Any commercial use, including incorporation into a product for sale, or use of the software to provide paid services, is not permitted without a commercial license. For licensing enquiries please contact UCL Business Ltd (https://www.uclb.com).')
+  
   cmdline.add_description('This command requires a list of training streamlines, which can be provided in one of two ways.')
   cmdline.add_description('Option 1: Directly provide a list of streamlines as the first positional argument.')
   cmdline.add_description('Option 2: Provide a list of subject prefixes as the first positional argument and the corresponding common suffix (same for all subjects) via the -streamlines option')
@@ -53,8 +51,10 @@ def usage(cmdline): #pylint: disable=unused-variable
   cmdline.add_argument('-streamlines', metavar='pattern', help='Common suffix for streamline files.')
   cmdline.add_argument('-transform', metavar='pattern', help='Common suffix for transform to standard space. Note that this transform should be in reverse convention, or the same that would be used to transform an image from subject to template space. Transform inversion for warping streamlines is handled by the command.')
   cmdline.add_argument('-test', action='store_true', help='Output parsed streamline and transform file paths without any further processing.')
+  
   # Citations
-  cmdline.add_citation('Young, F., Aquilina, K., A Clark, C., & D Clayden, J. (2022). Fibre tract segmentation for intraoperative diffusion MRI in neurosurgical patients using tract-specific orientation atlas and tumour deformation modelling. International journal of computer assisted radiology and surgery, 17(9), 1559–1567. https://doi.org/10.1007/s11548-022-02617-z')
+  cmdline.add_citation('Young, F.; Aquilina, K.; Seunarine, K.K.; Mancini, L.; Clark, C.A. & Clayden, J.D. (2024). Fibre orientation atlas guided rapid segmentation of white matter tracts. Human Brain Mapping, 45(2), e26578. DOI 10.1002/hbm.26578')
+  cmdline.add_citation('Young, F.; Aquilina, K.; Clark, C.A. & Clayden, J.D. (2022). Fibre tract segmentation for intraoperative diffusion MRI in neurosurgical patients using tract-specific orientation atlas and tumour deformation modelling. International Journal of Computer Assisted Radiology and Surgery, 17(9), 1559–1567. DOI 10.1007/s11548-022-02617-z')
 
 def execute():
   from mrtrix3 import MRtrixError, __version__
@@ -91,6 +91,7 @@ def execute():
       self.substitutions = { 'IN': self.sub_in, 'NAME': self.sub_name, 'PRE': self.sub_pre, 'UNI': self.sub_uni, 'ROOT': self.sub_root }
       app.debug('Input text: ' + input_text)
       app.debug('Substitutions: ' + str(self.substitutions))
+  # --- to here --- #
 
     def sub(self, str):
       for (key, value) in self.substitutions.items():

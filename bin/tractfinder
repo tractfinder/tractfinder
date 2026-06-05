@@ -1,19 +1,15 @@
 #!/usr/bin/env python3
 
-# Copyright (c) 2008-2023 the MRtrix3 contributors.
-#
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
-#
-# Covered Software is provided under this License on an "as is"
-# basis, without warranty of any kind, either expressed, implied, or
-# statutory, including, without limitation, warranties that the
-# Covered Software is free of defects, merchantable, fit for a
-# particular purpose or non-infringing.
-# See the Mozilla Public License v. 2.0 for more details.
-#
-# For more details, see http://www.mrtrix.org/.
+# Tractfinder is Copyright (c) 2023-2026 Fiona Young, and (c) 2026 Tractfinder
+# contributors. The software is distributed "as is", without any warranty, for
+# non-commercial use only. Any commercial use, including incorporation into a
+# product for sale, or use of the software to provide paid services, is not
+# permitted without a commercial license. For licensing enquiries please
+# contact UCL Business Ltd (https://www.uclb.com).
+# 
+# Tractfinder may include redistributed source files from MRtrix3
+# (https://www.mrtrix.org/), which are subject to separate licensing terms.
+# Details can be found in the relevant files.
 
 # Script for mapping fibre bundles based on provided tract orientation atlas[es]
 # Written by Fiona Young, 2023
@@ -30,8 +26,9 @@ def usage(cmdline): #pylint: disable=unused-variable
   global _GIT_VERSION
   _GIT_VERSION = cmdline._git_version # cheeky
 
-  cmdline.set_author('Fiona Young (fiona.young.15@ucl.ac.uk)')
+  cmdline.set_author('Fiona Young (fiona.young.15@ucl.ac.uk) and Jon Clayden (code@clayden.org)')
   cmdline.set_synopsis('Map fibre bundles based on tract orientation atlas(es)')
+  cmdline.set_copyright('Tractfinder is Copyright (c) 2023-2026 Fiona Young, and (c) 2026 Tractfinder contributors. The software is distributed "as is", without any warranty, for non-commercial use only. Any commercial use, including incorporation into a product for sale, or use of the software to provide paid services, is not permitted without a commercial license. For licensing enquiries please contact UCL Business Ltd (https://www.uclb.com).')
   # cmdline.add_description('')
 
   cmdline.add_argument('input', help='the input FOD image')
@@ -65,10 +62,11 @@ def usage(cmdline): #pylint: disable=unused-variable
   common_options.add_argument('-nii', '-nii.gz', '-mif.gz', nargs=0, action=StoreGiven, dest='fmt', default='mif', help='write output files in NIfTI or compressed MRtrix3 format instead of the default .mif (valid only for directory input/output)')
 
   # Citations
-  cmdline.add_citation('Young, F., Aquilina, K., A Clark, C., & D Clayden, J. (2022). Fibre tract segmentation for intraoperative diffusion MRI in neurosurgical patients using tract-specific orientation atlas and tumour deformation modelling. International journal of computer assisted radiology and surgery, 17(9), 1559–1567. https://doi.org/10.1007/s11548-022-02617-z')
-  cmdline.add_citation('Nowinski, W. L., & Belov, D. (2005). Toward atlas-assisted automatic interpretation of MRI morphological brain scans in the presence of tumor. Academic radiology, 12(8), 1049–1057. https://doi.org/10.1016/j.acra.2005.04.018')
-  cmdline.add_citation('Jenkinson, M., Bannister, P., Brady, J. M. and Smith, S. M. Improved Optimisation for the Robust and Accurate Linear Registration and Motion Correction of Brain Images. NeuroImage, 17(2), 825-841, 2002.', condition='If performing registration (i.e. -transform option not provided)', is_external=True)
-  cmdline.add_citation('Smith, S. M. Fast robust automated brain extraction. Human Brain Mapping, 17(3), 143-155, 2002.', condition='If relying on the script to generate a brain mask (either for registration or tumour deformation modelling)', is_external=True)
+  cmdline.add_citation('Young, F.; Aquilina, K.; Seunarine, K.K.; Mancini, L.; Clark, C.A. & Clayden, J.D. (2024). Fibre orientation atlas guided rapid segmentation of white matter tracts. Human Brain Mapping, 45(2), e26578. DOI 10.1002/hbm.26578')
+  cmdline.add_citation('Young, F.; Aquilina, K.; Clark, C.A. & Clayden, J.D. (2022). Fibre tract segmentation for intraoperative diffusion MRI in neurosurgical patients using tract-specific orientation atlas and tumour deformation modelling. International Journal of Computer Assisted Radiology and Surgery, 17(9), 1559–1567. DOI 10.1007/s11548-022-02617-z')
+  cmdline.add_citation('Nowinski, W.L., & Belov, D. (2005). Toward atlas-assisted automatic interpretation of MRI morphological brain scans in the presence of tumor. Academic Radiology, 12(8), 1049–1057. DOI 10.1016/j.acra.2005.04.018')
+  cmdline.add_citation('Jenkinson, M., Bannister, P., Brady, J.M. and Smith, S.M. (2002). Improved optimisation for the Robust and Accurate Linear Registration and Motion Correction of Brain Images. NeuroImage, 17(2), 825-841, 2002.', condition='If performing registration (i.e. -transform option not provided)', is_external=True)
+  cmdline.add_citation('Smith, S.M. (2002). Fast robust automated brain extraction. Human Brain Mapping, 17(3), 143-155.', condition='If relying on the script to generate a brain mask (either for registration or tumour deformation modelling)', is_external=True)
 
 # Custom argparse action for detecting which option string provided
 # and storing that as argument value
