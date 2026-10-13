@@ -21,7 +21,7 @@ The script `bin/tractfinder` is written as an external module against the MRtrix
 To install tractfinder, first clone this repository:
 
 ```bash
-$ git clone https://github.com/fionaEyoung/tractfinder.git
+$ git clone https://github.com/tractfinder/tractfinder.git
 ```
 
 Next, link the tractfinder repository with your MRtrix3 installation. See MRtrix's [guide on external modules](https://mrtrix.readthedocs.io/en/latest/tips_and_tricks/external_modules.html) for more information.
